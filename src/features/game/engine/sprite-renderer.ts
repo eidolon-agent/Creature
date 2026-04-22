@@ -134,8 +134,6 @@ const PAL: Record<string, [number,number,number][]> = {
     [184,101,182],
     [255,255,255],
   ],
-    [255,255,255],
-  ],
   guildmaster: [
     [26,26,26],
     [180,140,60], // gold robe

@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/neynar-db-sdk/db";
-import { leaderboard, battleLog } from "@/db/schema";
+import { leaderboard, battleLogs } from "@/db/schema";
 import { eq, desc, sql } from "drizzle-orm";
 
 export interface PlayerScore {
@@ -83,7 +83,7 @@ export async function submitScore(input: SubmitScoreInput): Promise<void> {
  * Keeps only the 200 most recent entries per cleanup.
  */
 export async function logBattleEvent(input: LogEventInput): Promise<void> {
-  await db.insert(battleLog).values({
+  await db.insert(battleLogs).values({
     fid:       input.fid,
     username:  input.username,
     eventType: input.eventType,
@@ -122,8 +122,8 @@ export async function getPlayerScore(fid: number): Promise<PlayerScore | null> {
 export async function getRecentBattleLog(): Promise<BattleLogEntry[]> {
   const rows = await db
     .select()
-    .from(battleLog)
-    .orderBy(desc(battleLog.createdAt))
+    .from(battleLogs)
+    .orderBy(desc(battleLogs.createdAt))
     .limit(20);
   return rows;
 }

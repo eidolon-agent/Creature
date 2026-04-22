@@ -9,6 +9,8 @@ export const players = pgTable('players', {
   id: uuid('id').primaryKey().defaultRandom(),
   fid: integer('fid').notNull().unique(), // Farcaster ID
   username: text('username').notNull(),
+  name: text('name').notNull(), // Custom hero name
+  class: text('class').notNull(), // warrior, mage, rogue, healer
   level: integer('level').default(1).notNull(),
   experience: bigint('experience', { mode: 'number' }).default(0).notNull(),
   hp: integer('hp').default(100).notNull(),
@@ -182,13 +184,13 @@ export const kvTable = pgTable('kv', {
 });
 
 // ============ INDEXES ============
-import { index } from 'drizzle-orm/pg-core';
 
-export const playerFidIndex = index('player_fid_idx').on(players.fid);
-export const creatureOwnerIndex = index('creature_owner_idx').on(creatures.ownerFid);
-export const leaderboardScoreIndex = index('leaderboard_score_idx').on(leaderboard.score.desc());
-export const battleLogTimeIndex = index('battle_log_time_idx').on(battleLogs.createdAt.desc());
-export const guildLeaderIndex = index('guild_leader_idx').on(guilds.leaderFid);
+// Temporarily comment out all indexes to test schema push
+// export const playerFidIndex = index('player_fid_idx').on(players.fid);
+// export const creatureOwnerIndex = index('creature_owner_idx').on(creatures.ownerFid);
+// export const leaderboardScoreIndex = index('leaderboard_score_idx').on(leaderboard.score);
+// export const battleLogTimeIndex = index('battle_log_time_idx').on(battleLogs.createdAt);
+// export const guildLeaderIndex = index('guild_leader_idx').on(guilds.leaderFid);
 
 // ============ SCHEMA EXPORTS ============
 export const schema = {
