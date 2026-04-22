@@ -1,10 +1,12 @@
 {
   "name": "@neynar/library.miniapp-template",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "packageManager": "pnpm@10.30.3",
   "scripts": {
     "db:push": "[ -z \"$DATABASE_URL\" ] || drizzle-kit push --force --verbose </dev/null",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
     "build": "NODE_OPTIONS=--max-old-space-size=4096 next build",
     "clean": "rimraf .next node_modules",
     "cleanup": "node scripts/cleanup.js",
@@ -18,13 +20,19 @@
     "lint:fix": "eslint . --fix",
     "lint:next": "next lint",
     "start": "next start",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "contracts:test": "cd contracts && forge test",
+    "contracts:deploy": "cd contracts && forge script script/Deploy.s.sol --rpc-url $SEPOLIA_RPC_URL --broadcast --verify -vvv",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
     "type-check:detailed": "tsc --noEmit --pretty --listFiles",
     "type-check:watch": "tsc --noEmit --watch",
     "validate": "pnpm run type-check && pnpm run lint && pnpm run format:check",
-    "validate:fix": "pnpm run type-check && pnpm run lint:fix && pnpm run format"
+    "validate:fix": "pnpm run type-check && pnpm run lint:fix && pnpm run format",
+    "deploy": "./deploy.sh"
   },
   "dependencies": {
     "@coingecko/coingecko-typescript": "1.11.3",
@@ -35,6 +43,7 @@
     "@neynar/ui": "0.3.1",
     "@tanstack/react-query": "5.90.5",
     "drizzle-orm": "^0.38.3",
+    "howler": "^2.2.4",
     "jotai": "2.15.0",
     "jotai-effect": "2.1.3",
     "lucide-react": "0.545.0",
