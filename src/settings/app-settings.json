@@ -1,0 +1,13 @@
+{
+  "name": "CreatureQuest",
+  "shortName": "CreatureQuest",
+  "subtitle": "Web3 MMORPG Companion",
+  "description": "Manage your NFT creatures, configure AI agents to auto-farm, track battles, and dominate the leaderboard in the ultimate Web3 MMORPG experience.",
+  "shortDescription": "Own creatures. Deploy AI agents. Earn tokens.",
+  "primaryCategory": "games",
+  "tags": ["game", "nft", "ai", "rpg", "defi"],
+  "splashBackgroundColor": "#0a0f1e",
+  "tagline": "Own creatures. Earn tokens.",
+  "requiredChains": ["eip155:8453", "eip155:1"],
+  "shareButtonTitle": "Play CreatureQuest"
+}
